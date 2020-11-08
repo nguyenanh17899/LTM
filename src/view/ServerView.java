@@ -1,6 +1,8 @@
 package view;
 
 import controller.ServerControl;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -26,6 +28,11 @@ public class ServerView extends javax.swing.JFrame {
     public ServerView() throws UnknownHostException, UnknownHostException {
         initComponents();
         txtIP.setText(InetAddress.getLocalHost().getHostAddress());
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e){
+                System.exit(0);
+            }
+        });
     }
 
     /**

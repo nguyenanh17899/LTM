@@ -31,7 +31,9 @@ public class ServerControl {
     private boolean opened;
     public ServerControl(int serverPort) throws IOException {
         getDBConnection("chatonline", "root", "");
+        System.out.println("tao con thành cong");
         opened= openServer(serverPort);
+        System.out.println("tao server socket thanh conh");
         while(true){
             listening();
         }
