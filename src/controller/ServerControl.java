@@ -13,7 +13,9 @@ import java.net.Socket;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Request;
@@ -79,7 +81,10 @@ public class ServerControl {
                 if(req.getNum()==1){
                     User s = (User)req.getStd();
                     if(checkUser(s)){
-                        oos.writeObject("ok");
+                        User u = getUserByUsername(s.getUsername());
+                        setListFriend(u);
+                        updateSTT(u);
+                        oos.writeObject(u);
                     }
                     else
                         oos.writeObject("false");
@@ -92,7 +97,7 @@ public class ServerControl {
     }
 
     private boolean checkUser(User s) {
-         String query = "Select * FROM tbluser WHERE username ='"+s.getUsername()+"'AND password ='"+ s.getPassword()+"'";
+         String query = "Select * FROM users WHERE username ='"+s.getUsername()+"'AND password ='"+ s.getPassword()+"'";
         try {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -105,7 +110,58 @@ public class ServerControl {
         }
         return false;
     }
-    
-    
+    private User getUserByUsername(String uname){
+        User u = new User();
+        String sql = "SELECT * FROM users where username='"+uname+"'";
+        Statement st;
+        try {
+            st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if(rs.next()){
+                u.setId(rs.getInt("id"));
+                u.setUsername(rs.getString("username"));
+                u.setPassword(rs.getString("password"));
+                u.setRole(rs.getInt("role"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ServerControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return u;
+    }
+    public void setListFriend(User u){
+        String sql = "SELECT * FROM users,friends WHERE id_user = '"+u.getId()+"' AND id_friend = users.id ";
+        Statement st;
+        ArrayList<User> listF = new ArrayList<User>();
+        try {
+            st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next()){
+                User fr = new User();
+                fr.setId(rs.getInt("id"));
+                fr.setUsername(rs.getString("username"));
+                fr.setPassword(rs.getString("password"));
+                fr.setRole(rs.getInt("role"));
+                fr.setStt(rs.getString("stt"));
+                listF.add(fr);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ServerControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        u.setListF(listF);
+        
+    }
+    private boolean updateSTT(User u){
+        String sql = "UPDATE users SET stt = 'active' WHERE id ='"+u.getId()+"'";
+        Statement st;
+        
+        try {
+            st = con.createStatement();
+            st.executeUpdate(sql);
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(ServerControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
     
 }

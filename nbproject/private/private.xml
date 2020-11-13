@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/code/LTMang/LTM/src/view/LoginView.java</file>
-            <file>file:/D:/code/LTMang/LTM/src/model/User.java</file>
-            <file>file:/D:/code/LTMang/LTM/src/controller/ServerControl.java</file>
-            <file>file:/D:/code/LTMang/LTM/src/view/ServerView.java</file>
-            <file>file:/D:/code/LTMang/LTM/src/model/Request.java</file>
-            <file>file:/D:/code/LTMang/LTM/src/controller/ClientControl.java</file>
+            <file>file:/C:/Users/Nguyen%20Ngoc%20Anh/Desktop/anh/2020PTIT/PTITk1n4/LTM/LTM-master/src/model/User.java</file>
+            <file>file:/C:/Users/Nguyen%20Ngoc%20Anh/Desktop/anh/2020PTIT/PTITk1n4/LTM/LTM-master/src/view/MainClientView.java</file>
+            <file>file:/C:/Users/Nguyen%20Ngoc%20Anh/Desktop/anh/2020PTIT/PTITk1n4/LTM/LTM-master/src/controller/ServerControl.java</file>
+            <file>file:/C:/Users/Nguyen%20Ngoc%20Anh/Desktop/anh/2020PTIT/PTITk1n4/LTM/LTM-master/src/view/LoginView.java</file>
+            <file>file:/C:/Users/Nguyen%20Ngoc%20Anh/Desktop/anh/2020PTIT/PTITk1n4/LTM/LTM-master/src/model/Request.java</file>
         </group>
     </open-files>
 </project-private>

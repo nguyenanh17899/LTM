@@ -128,16 +128,18 @@ public class LoginView extends javax.swing.JFrame {
         clientCtr.openConnection();
         clientCtr.sendData(req);
         Object result = clientCtr.receiveData();
-            if (result instanceof String) {
-                if(result.equals("ok")){
-                showMessage("Login succesfully!");
-            }
-            else if(result.equals("false"))
-                showMessage("Login not succesfully!");
-            }
-            else{
-                showMessage("Login not succesfully");
-            }
+        System.out.println("ok");
+        if(result instanceof Object){
+            showMessage("Login succesfully!");
+            User user = (User) result;
+//            System.out.println(user);
+            MainClientView view =  new MainClientView(user);
+            view.setVisible(true);
+            this.setVisible(false);
+        }
+        else{
+            showMessage("Login not succesfully");
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
